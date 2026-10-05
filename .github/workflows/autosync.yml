@@ -9,7 +9,7 @@ name: Auto-sync
 # `.github/workflows/` at the ROOT of a repository. This one is four levels down,
 # so it is text in this repository and a workflow only in the seller's.
 #
-# **IT IS KEPT HERE BECAUSE THE THING IT CALLS IS HERE.** The eight secret names
+# **IT IS KEPT HERE BECAUSE THE THING IT CALLS IS HERE.** The ten secret names
 # and the tag are written in two files; when they were written in two
 # repositories with nothing joining them, that is the exact shape this project
 # has paid for again and again. `autosync/nightly_checks.py` reads this file and
@@ -91,12 +91,12 @@ jobs:
     # in it. Every night would have failed inside a run. `v0.1.1` is the
     # first tag a seller can actually fetch on.
     #
-    # **NAMED HERE SINCE 2026-10-03: `v0.1.2`.** It carries everything repaired
-    # since 9 September -- 23 changed files inside `autosync/` against `v0.1.1`
-    # -- and all 31 pipeline check files passed at tagging. A template still
-    # naming `v0.1.1` hands a brand-new seller September's code on their first
-    # night, which is the fault this line exists to prevent.
-    uses: kartaan-com/Kartaan-AutoSync/.github/workflows/autosync.yml@v0.1.2
+    # **NAMED HERE SINCE 2026-10-05: `v0.1.5`.** It is the first tag whose run
+    # holds no Kartaan secret and no Kartaan server (job 25, route (e)): the
+    # Google values are the device client's and the database is reached through
+    # the seller's own Firebase sign-in. A template naming an older tag would
+    # hand a new seller the old Google step.
+    uses: kartaan-com/Kartaan-AutoSync/.github/workflows/autosync.yml@v0.1.5
     with:
       # **`|| false` IS NOT DECORATION.** On a scheduled tick the `inputs`
       # context has nothing in it, and an empty value handed to a boolean input
@@ -117,8 +117,10 @@ jobs:
       AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
       AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
       AMAZON_REFRESH_TOKEN: ${{ secrets.AMAZON_REFRESH_TOKEN }}
-      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      GOOGLE_DEVICE_CLIENT_ID: ${{ secrets.GOOGLE_DEVICE_CLIENT_ID }}
+      GOOGLE_DEVICE_CLIENT_SECRET: ${{ secrets.GOOGLE_DEVICE_CLIENT_SECRET }}
+      GOOGLE_DEVICE_REFRESH_TOKEN: ${{ secrets.GOOGLE_DEVICE_REFRESH_TOKEN }}
+      FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      FIREBASE_REFRESH_TOKEN: ${{ secrets.FIREBASE_REFRESH_TOKEN }}
       DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
       FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
